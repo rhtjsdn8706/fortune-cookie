@@ -4,4 +4,4 @@ Disallow: /survey
 Disallow: /loading
 Disallow: /result
 
-Sitemap: https://fortunecookie.today/sitemap.xml
+Sitemap: https://fortune-cookie-ebon.vercel.app/sitemap.xml
