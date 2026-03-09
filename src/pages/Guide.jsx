@@ -1,4 +1,5 @@
 import ContentPage from '../components/Layout/ContentPage';
+import AdBanner from '../components/Ad/AdBanner';
 
 export default function Guide() {
   return (
@@ -39,6 +40,8 @@ export default function Guide() {
           오늘날 연간 약 30억 개가 생산되는 전 세계적 문화 아이콘입니다.
         </p>
       </section>
+
+      <AdBanner className="my-4" />
 
       <section>
         <h2 className="text-lg font-semibold text-text-main mb-4">자주 묻는 질문 (FAQ)</h2>

@@ -1,5 +1,6 @@
 import ContentPage from '../components/Layout/ContentPage';
 import Character from '../components/Character/Character';
+import AdBanner from '../components/Ad/AdBanner';
 
 export default function About() {
   return (
@@ -40,6 +41,8 @@ export default function About() {
           <li>매일 새롭게 — 같은 사람도 날마다 다른 결과</li>
         </ul>
       </section>
+
+      <AdBanner className="my-4" />
 
       <section>
         <h2 className="text-lg font-semibold text-text-main mb-3">엔터테인먼트 서비스입니다</h2>

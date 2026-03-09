@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import FortuneResult from '../components/Result/FortuneResult';
 import ShareButtons from '../components/ShareCard/ShareButtons';
+import AdBanner from '../components/Ad/AdBanner';
 import useFortune from '../hooks/useFortune';
 import { getZodiac, getZodiacFortune } from '../data/zodiac';
 
@@ -35,6 +36,9 @@ export default function Result() {
           </p>
         </div>
       )}
+
+      {/* 광고 */}
+      <AdBanner className="my-4 max-w-md" />
 
       {/* 운세 결과 */}
       <FortuneResult fortune={fortune} />
@@ -72,6 +76,9 @@ export default function Result() {
           </p>
         </div>
       </div>
+
+      {/* 광고 */}
+      <AdBanner className="my-4 max-w-md" format="rectangle" />
 
       {/* 다시하기 */}
       <button
