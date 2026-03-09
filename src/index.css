@@ -13,3 +13,23 @@
   --color-border: #2D2050;
   --color-border-card: #3D2A70;
 }
+
+/* ── Light mode overrides ── */
+:root[data-theme="dark"] {
+  --promo-bg: linear-gradient(135deg, #2D1A50, #4A1A35);
+}
+
+:root[data-theme="light"] {
+  --promo-bg: linear-gradient(135deg, #EDE9FE, #FCE7F3);
+  --color-bg-base: #F8F6FF;
+  --color-bg-card: #FFFFFF;
+  --color-purple: #7C3AED;
+  --color-purple-light: #6D28D9;
+  --color-pink: #DB2777;
+  --color-text-main: #1E1033;
+  --color-text-sub: #6B5A8A;
+  --color-text-detail: #4A3D66;
+  --color-lucky: #FBBF24;
+  --color-border: #E2D8F0;
+  --color-border-card: #D4C4EB;
+}

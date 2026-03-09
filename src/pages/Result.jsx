@@ -52,7 +52,7 @@ export default function Result() {
       <div className="w-full max-w-md mb-6">
         <div
           className="rounded-2xl p-6 border border-pink text-center"
-          style={{ background: 'linear-gradient(135deg, #2D1A50, #4A1A35)' }}
+          style={{ background: 'var(--promo-bg, linear-gradient(135deg, #2D1A50, #4A1A35))' }}
         >
           <p className="text-text-main font-bold text-lg mb-2">
             💜 주변 사람 운세도 봐줄게
