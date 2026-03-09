@@ -26,7 +26,7 @@ export default function Result() {
   return (
     <div className="flex-1 flex flex-col items-center pt-8 pb-12 px-4">
       {zodiac && (
-        <div className="text-center mt-4 mb-8 animate-fade-in">
+        <div className="text-center mt-4 mb-4 animate-fade-in">
           <span className="text-7xl">{zodiac.emoji}</span>
           <p className="text-text-main text-lg font-bold mt-2">
             {birthYear}년생 {zodiac.name}띠
@@ -36,9 +36,6 @@ export default function Result() {
           </p>
         </div>
       )}
-
-      {/* 광고 */}
-      <AdBanner className="my-4 max-w-md" />
 
       {/* 운세 결과 */}
       <FortuneResult fortune={fortune} />
