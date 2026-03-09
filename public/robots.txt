@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /survey
+Disallow: /loading
+Disallow: /result
+
+Sitemap: https://fortunecookie.today/sitemap.xml
