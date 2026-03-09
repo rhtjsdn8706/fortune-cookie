@@ -7,14 +7,14 @@ export default function Header() {
   const isContentPage = contentPages.includes(location.pathname);
 
   return (
-    <header className="w-full px-4 py-3 flex items-center justify-between max-w-2xl mx-auto">
-      <Link to="/" className="text-white font-bold text-lg hover:opacity-80 transition-opacity">
-        🥠 오늘의 포춘쿠키
+    <header className="sticky top-0 z-50 h-14 flex items-center justify-between px-4 bg-bg-base/90 backdrop-blur-sm border-b border-border">
+      <Link to="/" className="text-gradient-hero font-bold text-lg hover:opacity-80 transition-opacity">
+        행운신령
       </Link>
       {isContentPage && (
         <Link
           to="/"
-          className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+          className="text-sm text-purple-light hover:text-pink transition-colors"
         >
           운세 보기
         </Link>

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Character from '../components/Character/Character';
 
 const currentYear = new Date().getFullYear();
 const years = Array.from({ length: 80 }, (_, i) => currentYear - 15 - i);
@@ -22,24 +21,22 @@ export default function Landing() {
   };
 
   const selectClass =
-    'bg-gray-800 text-white border border-gray-700 rounded-xl px-4 py-3 text-sm appearance-none focus:outline-none focus:border-purple-500 transition-colors';
+    'bg-bg-card text-text-main border border-border-card rounded-xl px-4 py-3 text-sm appearance-none focus:outline-none focus:border-purple transition-colors';
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-4 py-8">
-      {/* 로고 */}
+      {/* 히어로 타이틀 */}
       <div className="text-center mb-2">
-        <h1 className="text-2xl font-bold text-white mb-1">🥠 오늘의 포춘쿠키</h1>
-        <p className="text-gray-400 text-sm">AI가 꿰뚫어보는 오늘의 운세</p>
-      </div>
-
-      {/* 캐릭터 */}
-      <div className="my-8">
-        <Character mode="default" size="xl" />
+        <h1 className="text-[2.5rem] font-black leading-tight text-gradient-hero">
+          오늘의 운세,
+          <br />
+          꿰뚫어봐줄게
+        </h1>
       </div>
 
       {/* 생년월일 */}
       <div className="w-full max-w-sm space-y-4">
-        <p className="text-gray-400 text-xs text-center">생년월일을 알려줘</p>
+        <p className="text-text-sub text-xs text-center">생년월일을 알려줘</p>
         <div className="grid grid-cols-3 gap-2">
           <select
             value={year}
@@ -80,23 +77,20 @@ export default function Landing() {
           onClick={handleStart}
           disabled={!isValid}
           className={`
-            w-full py-4 rounded-2xl text-sm font-semibold transition-all
+            w-full py-4 rounded-full text-sm font-bold transition-all
             ${
               isValid
-                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:opacity-90 active:scale-[0.98]'
-                : 'bg-gray-800 text-gray-600 cursor-not-allowed'
+                ? 'bg-pink text-white hover:opacity-90 active:scale-[0.98] glow-pink'
+                : 'bg-bg-card text-text-sub/40 cursor-not-allowed'
             }
           `}
         >
-          오늘 운세 보기
+          오늘 운세 보기 →
         </button>
       </div>
 
-      <p className="text-gray-600 text-xs mt-6">
-        가볍게 시작해서 '어떻게 알았지?'로 끝나는 경험
-      </p>
-      <p className="text-gray-700 text-xs mt-2 max-w-sm text-center">
-        본 서비스는 오락 목적이며, 전문 상담을 대체하지 않습니다.
+      <p className="text-text-sub/50 text-xs mt-6">
+        ✦ 행운신령
       </p>
     </div>
   );

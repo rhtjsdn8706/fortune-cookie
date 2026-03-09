@@ -1,7 +1,7 @@
-import { introductions, coreMessages, closings, luckyKeywords } from '../data/fortuneMap';
+import { shortJeomsa, detailFortune, luckyKeywords } from '../data/fortuneMap';
 
 const concernKeys = ['money', 'love', 'career', 'relationship'];
-const closingKeys = ['believer', 'bored', 'shared', 'comfort'];
+const stressKeys = ['media', 'eating', 'sleep', 'zone_out'];
 
 function seededRandom(seed) {
   let x = Math.sin(seed) * 10000;
@@ -19,42 +19,69 @@ export default function useFortune(answers, birthDate) {
   if (!answers || answers.length < 10 || !birthDate) return null;
 
   const seed = getDaySeed(birthDate);
-  const rand = seededRandom(seed);
 
-  // Q1: 에너지 (0=번아웃쪽, 2=활기, 3=무난)
+  // Q1: 에너지 (0~1 = low, 2~3 = high)
   const energyIndex = answers[0];
-  // Q9: 하루 만족도 (0=좋음, 3=지침)
-  const dayIndex = answers[8];
+  const isHighEnergy = energyIndex >= 2;
+  const energyKey = isHighEnergy ? 'high' : 'low';
+
+  // Q2: 사회성 (0 = 외향, 3 = 내향)
+  const socialIndex = answers[1];
+  const isExtro = socialIndex <= 1;
+
   // Q3: 핵심 고민 (0=재물, 1=연애, 2=커리어, 3=관계)
   const concernIndex = answers[2];
+  const concernKey = concernKeys[concernIndex] || 'money';
+
+  // Q4: 스트레스 해소법
+  const stressIndex = answers[3];
+  const stressKey = stressKeys[stressIndex] || 'media';
+
+  // Q9: 하루 만족도 (0~1 = good, 2~3 = bad)
+  const dayIndex = answers[8];
+  const isGoodDay = dayIndex <= 1;
+  const dayKey = isGoodDay ? 'good' : 'bad';
+
   // Q10: 방문 이유 (0=진심, 1=심심, 2=공유, 3=위로)
   const visitIndex = answers[9];
 
-  // 도입부
-  const introKey = `${energyIndex}_${dayIndex}`;
-  const intro = introductions[introKey] || introductions['3_2'];
+  // ── 짧은 점사 3줄 ──
+  const short = shortJeomsa[concernKey]?.[energyKey]?.[dayKey]
+    || shortJeomsa.money.low.good;
 
-  // 핵심 메시지
-  const concernKey = concernKeys[concernIndex] || 'money';
-  const corePool = coreMessages[concernKey];
-  const coreIdx = Math.floor(rand * corePool.length);
-  const core = corePool[coreIdx];
+  // ── 긴 상세 해석 4영역 ──
+  const generalKey = `${energyKey}_${dayKey}`;
+  const general = detailFortune.general[generalKey];
 
-  // 마무리
-  const closingKey = closingKeys[visitIndex] || 'bored';
-  const closingPool = closings[closingKey];
-  const closingIdx = Math.floor(seededRandom(seed + 1) * closingPool.length);
-  const closing = closingPool[closingIdx];
+  // 재물운
+  const isMoneyConcern = concernKey === 'money';
+  const wealthKey = isMoneyConcern
+    ? (isHighEnergy ? 'money_high' : 'money_low')
+    : (isHighEnergy ? 'other_high' : 'other_low');
+  const wealth = detailFortune.wealth[wealthKey];
 
-  // 행운 키워드
-  const isHighEnergy = energyIndex >= 2;
+  // 관계운
+  const socialSuffix = isExtro ? 'extro' : 'intro';
+  let relationKey;
+  if (concernKey === 'love') {
+    relationKey = `love_${socialSuffix}`;
+  } else if (concernKey === 'relationship') {
+    relationKey = `relationship_${socialSuffix}`;
+  } else {
+    relationKey = `other_${socialSuffix}`;
+  }
+  const relation = detailFortune.relation[relationKey];
+
+  // 건강·컨디션
+  const health = detailFortune.health[stressKey];
+
+  // ── 행운 키워드 ──
   const energyLucky = isHighEnergy
     ? luckyKeywords.energy.high
     : luckyKeywords.energy.low;
   const concernLucky =
     luckyKeywords.concern[concernKey] || luckyKeywords.concern.money;
 
-  // 에너지 + 고민 조합에서 키워드 선택
   const colorIdx = Math.floor(seededRandom(seed + 2) * 2);
   const luckyColor =
     seededRandom(seed + 3) > 0.5
@@ -67,20 +94,14 @@ export default function useFortune(answers, birthDate) {
   const luckyTime =
     seededRandom(seed + 5) > 0.5 ? energyLucky.time : concernLucky.time;
 
-  // 캐릭터 모드 결정
+  // ── 캐릭터 모드 ──
   const isComfort = visitIndex === 3 || dayIndex === 3 || energyIndex <= 1;
   const characterMode = isComfort ? 'burnout' : 'shocked';
 
   return {
-    intro,
-    core,
-    closing,
-    fullText: `${intro}\n\n${core}\n\n${closing}`,
-    lucky: {
-      color: luckyColor,
-      number: luckyNumber,
-      time: luckyTime,
-    },
+    short,
+    detail: { general, wealth, relation, health },
+    lucky: { color: luckyColor, number: luckyNumber, time: luckyTime },
     characterMode,
     concernKey,
   };

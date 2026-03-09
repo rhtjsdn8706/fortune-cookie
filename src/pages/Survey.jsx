@@ -40,7 +40,8 @@ export default function Survey() {
       <div className="w-full max-w-md flex justify-between items-center mb-6">
         <button
           onClick={handleClose}
-          className="text-gray-500 hover:text-gray-300 text-xl transition-colors"
+          className="text-text-sub hover:text-text-main text-xl transition-colors"
+          aria-label="닫기"
         >
           ✕
         </button>

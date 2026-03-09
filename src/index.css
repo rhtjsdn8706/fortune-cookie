@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@theme {
+  --color-bg-base: #0F0A1E;
+  --color-bg-card: #1A1035;
+  --color-purple: #6B46C1;
+  --color-purple-light: #A78BFA;
+  --color-pink: #EC4899;
+  --color-text-main: #F5F0FF;
+  --color-text-sub: #A89CC8;
+  --color-text-detail: #C4B5E8;
+  --color-lucky: #FCD303;
+  --color-border: #2D2050;
+  --color-border-card: #3D2A70;
+}
